@@ -161,6 +161,10 @@ button {
   border-radius: 10px;
 }
 
+#befattning13 {grid-column: span 3; }
+#datum13 {grid-column: span 1; grid-row: span 2; }
+#beskrivning13 {grid-column: span 3;}
+
 #befattning12 {grid-column: span 3; }
 #datum12 {grid-column: span 1; grid-row: span 2; }
 #beskrivning12 {grid-column: span 3;}
@@ -262,6 +266,17 @@ li {
 .personligtBrev {
   grid-column: 1 / span 4;
   grid-row: 1 / span 12;
+}
+
+a.custom-link {
+  color: black;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+a.custom-link:hover {
+  transform: translateY(-2px);
 }
 
 .maskin-container {
@@ -704,6 +719,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .skill-button {
@@ -725,8 +741,8 @@ footer {
 }
 
 .hidden-text p {
-  font-size: calc(15px + (5) * ((100vw - 320px) / (420 - 320)));
-  padding: 0.25rem;
+  font-size: calc(16px + (2) * ((100vw - 320px) / (420 - 320)));
+  padding: 0.25rem 1.5vw 0.25rem 1.5vw;
 }
 
 .hidden-text.show {
@@ -794,6 +810,9 @@ footer {
   padding-top: calc(15px + (15) * ((100vw - 320px) / (660 - 320)));
 }
 
+#befattning13 {grid-column: span 4; }
+#datum13 {grid-column: span 4; }
+#beskrivning13 {grid-column: span 4;}
 
 #befattning12 {grid-column: span 4; }
 #datum12 {grid-column: span 4; }
@@ -940,6 +959,10 @@ p {
 .skills-container{
   padding-left: 0;
 }
+
+  #befattning13 {grid-column: span 4; }
+  #datum13 {grid-column: span 4; }
+  #beskrivning13 {grid-column: span 4;}
 
   #befattning12 {grid-column: span 4; }
   #datum12 {grid-column: span 4; }
