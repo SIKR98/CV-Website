@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simon Kraft</title>
   <link rel="stylesheet" href="CV_Project.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script> (function(){emailjs.init("qMVKlZyKP50EHzWXj");})();</script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="grid-container">
@@ -211,9 +214,14 @@
         <input type="email" id="email" name="email" class="form-input" placeholder="" required data-translate="emailPlaceholder">
         
         <textarea id="message" name="message" class="form-textarea" placeholder="" required data-translate="messagePlaceholder"></textarea>
-    
+        
+        <div class="g-recaptcha" id="recaptcha" data-sitekey="6Lc9hBMpAAAAAFkuz6q3Ya7rA8plRUzLxZESJjR1"></div>
+        <div id="recaptcha-error" style="color: red; font-size: 1.2em; margin-top: 0.25em;"></div>
+
         <button type="button" id="reset-button" class="reset-button" data-translate="resetButton"></button>
         <button type="submit" id="submit-button" class="submit-button" data-translate="submitButton"></button>
+
+        <div id="form-message" style="margin-top: 1em; font-weight: bold;"></div>
     </form>
     
 
@@ -620,218 +628,295 @@ function setActiveButtonAndContent(activeButtonId) {
 
     document.getElementById(activeButtonId).classList.add('active');
     sessionStorage.setItem('activeButton', activeButtonId); // Save active button
-}
-
-// Check for saved active button on page load
-const savedActiveButton = sessionStorage.getItem('activeButton');
-if (savedActiveButton) {
-    setActiveButtonAndContent(savedActiveButton);
-} else {
-    // If no button is saved, show default content (cv)
-    setActiveButtonAndContent('cvButton');
-}
-
-// Add event listeners for button clicks
-cvButton.addEventListener('click', () => setActiveButtonAndContent('cvButton'));
-brevButton.addEventListener('click', () => setActiveButtonAndContent('brevButton'));
-contactButton.addEventListener('click', () => setActiveButtonAndContent('contactButton'));
-shopButton.addEventListener('click', () => setActiveButtonAndContent('shopButton'));
-gamesButton.addEventListener('click', () => setActiveButtonAndContent('gamesButton'));
-
-document.addEventListener("DOMContentLoaded", function () {
-    const resetButton = document.getElementById("reset-button");
-    const form = document.getElementById("contact");
-
-    resetButton.addEventListener("click", function () {
-        form.reset(); // Clears all input fields
-    });
-});
-
-const menu = document.getElementById("button-container");
-const hamburger = document.getElementById("hamburgerMeny");
-
-// Toggle menu on click
-hamburger.addEventListener("click", function () {
-    menu.classList.toggle("activeee");
-});
-
-// Hide menu when mouse leaves (only if NOT manually opened via click)
-hamburger.addEventListener("mouseleave", () => {
-    setTimeout(() => {
-        if (!menu.matches(":hover") && !hamburger.matches(":hover")) {
-            menu.classList.remove("activeee");
-        }
-    }, 200);
-});
-
-menu.addEventListener("mouseleave", () => {
-    setTimeout(() => {
-        if (!hamburger.matches(":hover")) {
-            menu.classList.remove("activeee");
-        }
-    }, 200);
-});
-
-
-const meny = document.getElementById("button-container");
-const menuButtons = meny.querySelectorAll("button"); // Select all buttons inside the menu
-
-// Close menu when any button inside is clicked
-menuButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        meny.classList.remove("activeee"); // Remove the class to close the menu
-    });
-});
-
-
-function reorderButtons() {
-    const menu = document.getElementById("button-container");
-    const buttons = Array.from(menu.children);
-
-    // Store original order if not already set
-    if (!menu.dataset.originalOrder) {
-        menu.dataset.originalOrder = JSON.stringify(buttons.map(btn => btn.id));
     }
 
-    if (window.innerWidth <= 750) {
-        // Sort buttons by data-order attribute
-        const sortedButtons = buttons.sort((a, b) => parseInt(a.dataset.order) - parseInt(b.dataset.order));
-        menu.innerHTML = ""; // Clear menu
-        sortedButtons.forEach(btn => menu.appendChild(btn));
+    // Check for saved active button on page load
+    const savedActiveButton = sessionStorage.getItem('activeButton');
+    if (savedActiveButton) {
+        setActiveButtonAndContent(savedActiveButton);
     } else {
-        // Restore original order when larger than 750px
-        const originalOrder = JSON.parse(menu.dataset.originalOrder);
-        const reorderedButtons = originalOrder.map(id => document.getElementById(id));
-        menu.innerHTML = ""; // Clear menu
-        reorderedButtons.forEach(btn => menu.appendChild(btn));
+        // If no button is saved, show default content (cv)
+        setActiveButtonAndContent('cvButton');
     }
-}
 
-// Run on load & resize
-document.addEventListener("DOMContentLoaded", reorderButtons);
-window.addEventListener("resize", reorderButtons);
+    // Add event listeners for button clicks
+    cvButton.addEventListener('click', () => setActiveButtonAndContent('cvButton'));
+    brevButton.addEventListener('click', () => setActiveButtonAndContent('brevButton'));
+    contactButton.addEventListener('click', () => setActiveButtonAndContent('contactButton'));
+    shopButton.addEventListener('click', () => setActiveButtonAndContent('shopButton'));
+    gamesButton.addEventListener('click', () => setActiveButtonAndContent('gamesButton'));
 
+    const menu = document.getElementById("button-container");
+    const hamburger = document.getElementById("hamburgerMeny");
 
-
-
-
-//toggle skills mobil hidden text
-document.addEventListener("DOMContentLoaded", function () {
-    const toggleButton = document.getElementById("toggleSkills");
-    const hiddenText = document.querySelector(".hidden-text");
-
-    toggleButton.addEventListener("click", function (event) {
-        hiddenText.classList.toggle("show");
-        event.stopPropagation(); // Prevents the click from immediately triggering the document click event
+    // Toggle menu on click
+    hamburger.addEventListener("click", function () {
+        menu.classList.toggle("activeee");
     });
 
-    document.addEventListener("click", function (event) {
-        if (!hiddenText.contains(event.target) && !toggleButton.contains(event.target)) {
-            hiddenText.classList.remove("show");
+    // Hide menu when mouse leaves (only if NOT manually opened via click)
+    hamburger.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+            if (!menu.matches(":hover") && !hamburger.matches(":hover")) {
+                menu.classList.remove("activeee");
+            }
+        }, 200);
+    });
+
+    menu.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+            if (!hamburger.matches(":hover")) {
+                menu.classList.remove("activeee");
+            }
+        }, 200);
+    });
+
+
+    const meny = document.getElementById("button-container");
+    const menuButtons = meny.querySelectorAll("button"); // Select all buttons inside the menu
+
+    // Close menu when any button inside is clicked
+    menuButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            meny.classList.remove("activeee"); // Remove the class to close the menu
+        });
+    });
+
+
+    function reorderButtons() {
+        const menu = document.getElementById("button-container");
+        const buttons = Array.from(menu.children);
+
+        // Store original order if not already set
+        if (!menu.dataset.originalOrder) {
+            menu.dataset.originalOrder = JSON.stringify(buttons.map(btn => btn.id));
         }
+
+        if (window.innerWidth <= 750) {
+            // Sort buttons by data-order attribute
+            const sortedButtons = buttons.sort((a, b) => parseInt(a.dataset.order) - parseInt(b.dataset.order));
+            menu.innerHTML = ""; // Clear menu
+            sortedButtons.forEach(btn => menu.appendChild(btn));
+        } else {
+            // Restore original order when larger than 750px
+            const originalOrder = JSON.parse(menu.dataset.originalOrder);
+            const reorderedButtons = originalOrder.map(id => document.getElementById(id));
+            menu.innerHTML = ""; // Clear menu
+            reorderedButtons.forEach(btn => menu.appendChild(btn));
+        }
+    }
+
+    // Run on load & resize
+    document.addEventListener("DOMContentLoaded", reorderButtons);
+    window.addEventListener("resize", reorderButtons);
+
+
+
+
+
+    //toggle skills mobil hidden text
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("toggleSkills");
+        const hiddenText = document.querySelector(".hidden-text");
+
+        toggleButton.addEventListener("click", function (event) {
+            hiddenText.classList.toggle("show");
+            event.stopPropagation(); // Prevents the click from immediately triggering the document click event
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!hiddenText.contains(event.target) && !toggleButton.contains(event.target)) {
+                hiddenText.classList.remove("show");
+            }
+        });
     });
+
+
+    function generateFormula() {
+        const minValue = document.getElementById('minValue').value.trim();
+        const maxValue = document.getElementById('maxValue').value.trim();
+        const minWidth = getNumericInputValue('minWidth');
+        const maxWidth = getNumericInputValue('maxWidth');
+
+        if (isNaN(minWidth) || isNaN(maxWidth) || minWidth >= maxWidth || isNaN(minValue) || isNaN(maxValue)) {
+        return;
+        }
+
+        const diff = maxValue - minValue;
+        const formula = `calc(${minValue}px + (${diff}) * ((100vw - ${minWidth}px) / (${maxWidth} - ${minWidth})));`;
+        
+        document.getElementById('output').textContent = formula;
+    }
+
+    // Handle switching between dropdown and custom input field
+    function handleCustomInput(selectElement) {
+        const inputId = selectElement.id + 'Custom';
+        const inputField = document.getElementById(inputId);
+
+        if (selectElement.value === "custom") {
+            selectElement.style.display = "none";
+            inputField.style.display = "block";
+            inputField.focus();
+        }
+    }
+
+    // Reset dropdown if the custom input is left empty
+    function resetDropdownIfEmpty(inputElement, selectId) {
+        if (inputElement.value.trim() === "") {
+            inputElement.style.display = "none";
+            document.getElementById(selectId).style.display = "block";
+            document.getElementById(selectId).selectedIndex = 0;
+        }
+    }
+
+    // Get the numerical value from either dropdown or custom input
+    function getNumericInputValue(selectId) {
+        const selectElement = document.getElementById(selectId);
+        const inputElement = document.getElementById(selectId + 'Custom');
+
+        return selectElement.style.display !== "none"
+            ? parseInt(selectElement.value)
+            : parseInt(inputElement.value);
+    }
+
+    function copyToClipboard() {
+        const text = document.getElementById('output').textContent;
+        if (!text) return;
+        navigator.clipboard.writeText(text).catch(err => console.error('Error copying text: ', err));
+    }
+
+    function setDefaultMaxWidth() {
+        const screenWidth = window.innerWidth;
+        const screenWidths = [162, 320, 420, 768, 834, 1024, 1440, 1920, 2560];
+        let closestWidth = screenWidths.reduce((prev, curr) =>
+            Math.abs(curr - screenWidth) < Math.abs(prev - screenWidth) ? curr : prev
+        );
+
+        document.getElementById('maxWidth').value = closestWidth;
+    }
+
+    function loadSavedValues() {
+        const savedMinValue = sessionStorage.getItem('minValue');
+        const savedMaxValue = sessionStorage.getItem('maxValue');
+        if (savedMinValue) document.getElementById('minValue').value = savedMinValue;
+        if (savedMaxValue) document.getElementById('maxValue').value = savedMaxValue;
+    }
+
+    function saveValues() {
+        sessionStorage.setItem('minValue', document.getElementById('minValue').value.trim());
+        sessionStorage.setItem('maxValue', document.getElementById('maxValue').value.trim());
+    }
+
+    function resetValues() {
+        document.getElementById('minValue').value = "";
+        document.getElementById('maxValue').value = "";
+        document.getElementById('output').textContent = "";
+        sessionStorage.removeItem('minValue');
+        sessionStorage.removeItem('maxValue');
+    }
+
+    function triggerIframeRefresh() {
+        if (window.top !== window.self && !sessionStorage.getItem('pageLoaded')) {
+            sessionStorage.setItem('pageLoaded', 'true');
+            window.location.reload();
+        }
+    }
+
+    window.onload = function() {
+        triggerIframeRefresh();
+        setDefaultMaxWidth();
+        loadSavedValues();
+    };
+
+    document.getElementById('minValue').addEventListener('input', saveValues);
+    document.getElementById('maxValue').addEventListener('input', saveValues);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact");
+  const recaptchaBox = document.getElementById("recaptcha");
+  const recaptchaError = document.getElementById("recaptcha-error");
+  const messageBox = document.getElementById("form-message");
+  const resetButton = document.getElementById("reset-button");
+
+  // Restore input values from sessionStorage when the page loads
+  ["name", "phone", "email", "message"].forEach((id) => {
+    const field = document.getElementById(id);
+    const saved = sessionStorage.getItem(id);
+    if (field && saved) {
+      field.value = saved;
+    }
+
+    // Save current input value to sessionStorage as user types
+    field.addEventListener("input", () => {
+      sessionStorage.setItem(id, field.value);
+    });
+  });
+
+  // Handle form submission
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const recaptchaResponse = grecaptcha.getResponse();
+
+    // Validate that reCAPTCHA has been completed
+    if (!recaptchaResponse) {
+      recaptchaError.textContent = "Please verify that you're not a robot.";
+      recaptchaBox.style.border = "2px solid red";
+      return;
+    } else {
+      recaptchaError.textContent = "";
+      recaptchaBox.style.border = "none";
+    }
+
+    // Send form data using EmailJS
+    emailjs.send("service_fo2qef9", "template_b2sp50b", {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+      "g-recaptcha-response": recaptchaResponse,
+    }, "qMVKlZyKP50EHzWXj")
+    .then(() => {
+      // On success: clear form, reset reCAPTCHA, show success message, and clear stored data
+      form.reset();
+      grecaptcha.reset();
+      messageBox.style.color = "green";
+      messageBox.textContent = "Message sent successfully!";
+      ["name", "phone", "email", "message"].forEach((id) => {
+        sessionStorage.removeItem(id);
+      });
+    })
+    .catch((error) => {
+      // On error: show error message and log to console
+      messageBox.style.color = "red";
+      messageBox.textContent = "Something went wrong. Please try again.";
+      console.error("EmailJS Error:", error);
+    });
+  });
+
+  // Handle reset button click
+  resetButton.addEventListener("click", function () {
+    // Clear form fields
+    form.reset();
+
+    // Reset reCAPTCHA
+    grecaptcha.reset();
+
+    // Clear error and message displays
+    recaptchaError.textContent = "";
+    recaptchaBox.style.border = "none";
+    messageBox.textContent = "";
+
+    // Remove stored data from sessionStorage
+    ["name", "phone", "email", "message"].forEach((id) => {
+      sessionStorage.removeItem(id);
+    });
+  });
 });
 
 
-function generateFormula() {
-    const minValue = document.getElementById('minValue').value.trim();
-    const maxValue = document.getElementById('maxValue').value.trim();
-    const minWidth = getNumericInputValue('minWidth');
-    const maxWidth = getNumericInputValue('maxWidth');
-
-    if (isNaN(minWidth) || isNaN(maxWidth) || minWidth >= maxWidth || isNaN(minValue) || isNaN(maxValue)) {
-      return;
-    }
-
-    const diff = maxValue - minValue;
-    const formula = `calc(${minValue}px + (${diff}) * ((100vw - ${minWidth}px) / (${maxWidth} - ${minWidth})));`;
-    
-    document.getElementById('output').textContent = formula;
-}
-
-// Handle switching between dropdown and custom input field
-function handleCustomInput(selectElement) {
-    const inputId = selectElement.id + 'Custom';
-    const inputField = document.getElementById(inputId);
-
-    if (selectElement.value === "custom") {
-        selectElement.style.display = "none";
-        inputField.style.display = "block";
-        inputField.focus();
-    }
-}
-
-// Reset dropdown if the custom input is left empty
-function resetDropdownIfEmpty(inputElement, selectId) {
-    if (inputElement.value.trim() === "") {
-        inputElement.style.display = "none";
-        document.getElementById(selectId).style.display = "block";
-        document.getElementById(selectId).selectedIndex = 0;
-    }
-}
-
-// Get the numerical value from either dropdown or custom input
-function getNumericInputValue(selectId) {
-    const selectElement = document.getElementById(selectId);
-    const inputElement = document.getElementById(selectId + 'Custom');
-
-    return selectElement.style.display !== "none"
-        ? parseInt(selectElement.value)
-        : parseInt(inputElement.value);
-}
-
-function copyToClipboard() {
-    const text = document.getElementById('output').textContent;
-    if (!text) return;
-    navigator.clipboard.writeText(text).catch(err => console.error('Error copying text: ', err));
-}
-
-function setDefaultMaxWidth() {
-    const screenWidth = window.innerWidth;
-    const screenWidths = [162, 320, 420, 768, 834, 1024, 1440, 1920, 2560];
-    let closestWidth = screenWidths.reduce((prev, curr) =>
-        Math.abs(curr - screenWidth) < Math.abs(prev - screenWidth) ? curr : prev
-    );
-
-    document.getElementById('maxWidth').value = closestWidth;
-}
-
-function loadSavedValues() {
-    const savedMinValue = sessionStorage.getItem('minValue');
-    const savedMaxValue = sessionStorage.getItem('maxValue');
-    if (savedMinValue) document.getElementById('minValue').value = savedMinValue;
-    if (savedMaxValue) document.getElementById('maxValue').value = savedMaxValue;
-}
-
-function saveValues() {
-    sessionStorage.setItem('minValue', document.getElementById('minValue').value.trim());
-    sessionStorage.setItem('maxValue', document.getElementById('maxValue').value.trim());
-}
-
-function resetValues() {
-    document.getElementById('minValue').value = "";
-    document.getElementById('maxValue').value = "";
-    document.getElementById('output').textContent = ""; // Rensar output-fältet
-    sessionStorage.removeItem('minValue');
-    sessionStorage.removeItem('maxValue');
-}
-
-function triggerIframeRefresh() {
-    if (window.top !== window.self && !sessionStorage.getItem('pageLoaded')) {
-        sessionStorage.setItem('pageLoaded', 'true');
-        window.location.reload();
-    }
-}
-
-window.onload = function() {
-    triggerIframeRefresh();
-    setDefaultMaxWidth();
-    loadSavedValues();
-};
-
-document.getElementById('minValue').addEventListener('input', saveValues);
-document.getElementById('maxValue').addEventListener('input', saveValues);
-    </script>
+</script>
 
 <footer>
     <div class="footer-container">

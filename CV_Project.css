@@ -345,6 +345,16 @@ a.custom-link:hover {
   grid-column: span 2;
 }
 
+#recaptcha {
+  grid-column: span 2;
+  margin: 0 auto;
+}
+
+#recaptcha-error {
+  grid-column: span 2;
+  margin: 0 auto;
+}
+
 #reset-button, #submit-button {
   margin: 0;
   justify-self: center;
