@@ -215,13 +215,14 @@
         
         <textarea id="message" name="message" class="form-textarea" placeholder="" required data-translate="messagePlaceholder"></textarea>
         
-        <div class="g-recaptcha" id="recaptcha" data-sitekey="6LdiE1grAAAAAKDw92_AeHiH5zN9a7XG1rqcO2VO"></div>
-        <div id="recaptcha-error" style="color: red; font-size: 1.2em; margin-top: 0.25em;"></div>
+        <div class="recaptchaBox">
+            <div class="g-recaptcha" id="recaptcha" data-sitekey="6LdiE1grAAAAAKDw92_AeHiH5zN9a7XG1rqcO2VO"></div>
+            <div id="recaptcha-error" style="color: red; font-size: 1.2em; margin-top: 0.5em; text-align: center;"></div>
+            <div id="form-message" style="font-size: 1.2em; margin-top: 0.5em; text-align: center;"></div>
+        </div>
 
         <button type="button" id="reset-button" class="reset-button" data-translate="resetButton"></button>
         <button type="submit" id="submit-button" class="submit-button" data-translate="submitButton"></button>
-
-        <div id="form-message" style="margin-top: 1em; font-weight: bold;"></div>
     </form>
     
 
@@ -381,7 +382,7 @@ const getCurrentLanguage = () => localStorage.getItem("language") || "sv";
                 beskrivning13: "Vid sidan av min första verksamhet har jag startat och byggt upp ytterligare en plattform – Simon Solutions – en webshop för mina mer lekfulla och tekniska skapelser. Här säljer jag egenutvecklade produkter som 3D-printade föremål, laserbearbetade objekt, speciallösningar och nedladdningsbara STL-filer. Plattformen är tänkt att fungera som en flexibel försäljningsyta för mina fristående idéer och prototyper, och kompletterar min inredningsverksamhet på ett kreativt sätt. Jag ansvarar för hela processen själv – från design och tillverkning till kundkontakt, paketering och leverans.",
                 befattning12: "Universitetsutbildning: <br> Fullstack developer",
                 datum12: "Augusti 2024 – Pågående <hr> Företagsuniversitetet - Stockholm",
-                beskrivning12: "Med fokus på att utveckla kompletta websidor och applikationer från idé till färdig produkt med moderna teknologier och arbetsmetoder. Utbildningen omfattar både frontend, backend och ramverk med inriktning på teknologier som JavaScript, Node.js, React, HTML/CSS och databashantering. Får praktisk erfarenhet av att designa, utveckla och implementera moderna och responsiva webbapplikationer.",
+                beskrivning12: "En praktisk och teoretisk utbildning som ger en bred grund inom webbutveckling, med fokus på moderna tekniker och metoder. Under det första året har jag arbetat med frontend-tekniker som HTML, CSS, JavaScript och TypeScript, samt lärt mig ramverk som React och Angular. Utbildningen innehåller även versionshantering med Git, agilt arbetssätt och insikter i hur webbaserade applikationer planeras, designas och byggs. Parallellt har jag fördjupat mina kunskaper genom egna projekt, bland annat en e-handelsplattform byggd med React, Tailwind CSS och Supabase.",
                 befattning11: "Grundare – Sikr Design",
                 datum11: "Mars 2024 – Pågående <hr> Enskild firma - Stockholm",
                 beskrivning11: "Jag driver ett eget företag där jag designar, tillverkar och säljer unika inredningsprodukter med fokus på kvalitet, hantverk och form. Med hjälp av CAD, CAM, CNC och laserbearbetning tar jag fram egna produktidéer – från skiss till färdig produkt. Jag ansvarar för hela processen själv: design, prototyp, produktion, paketering och leverans. Jag sköter även marknadsföring och kundkontakt via min webbshop och sociala medier. Verksamheten kombinerar teknik och design på ett sätt som låter mig arbeta kreativt och lösningsorienterat.",          
@@ -423,8 +424,8 @@ const getCurrentLanguage = () => localStorage.getItem("language") || "sv";
                 personligtBrevText3: "Utöver mitt företagande går jag även på universitet där jag studerar till fullstack developer, vilket gör att jag kontinuerligt utvecklar mina färdigheter inom webbutveckling, databashantering och programmering. <br><br> Med den tid jag har över renoverar jag min sambos lägenhet på halvtid, lär mig att spela gitarr och tillbringar tid i naturen. Jag älskar att träna, gå på långa promenader, odla och laga mat!",
                 contactHeader: "Kontakta mig!",
                 contactText: "Har du några frågor eller vill veta mer? Fyll i formuläret nedan, så återkommer jag till dig så snart som möjligt. Jag ser fram emot att höra från dig!",
-                namePlaceholder: "Skriv ditt namn här:",
-                subjectPlaceholder: "Ämne:",
+                namePlaceholder: "Skriv namn här:",
+                subjectPlaceholder: "Skriv ämne här:",
                 emailPlaceholder: "Skriv din e-postadress här:",
                 messagePlaceholder: "Skriv ditt meddelande här:",
                 resetButton: "Rensa",
@@ -468,7 +469,7 @@ const getCurrentLanguage = () => localStorage.getItem("language") || "sv";
                 beskrivning13: "Alongside my first business, I founded and built Simon Solutions – a webshop for my more playful and technical creations. Here, I sell self-developed products such as 3D-printed items, laser-engraved objects, custom solutions, and downloadable STL files. The platform serves as a flexible outlet for my independent ideas and prototypes, complementing my interior-focused brand in a creative way. I handle the entire process myself – from design and production to customer communication, packaging, and delivery.",
                 befattning12: "University Education: <br> Fullstack Developer",
                 datum12: "August 2024 – Present <hr> Företagsuniversitetet - Stockholm",
-                beskrivning12: "With focus on developing complete websites and applications from concept to finished product using modern technologies and methodologies. My education covers both frontend and backend development, as well as frameworks, Placing an emphasis on technologies such as JavaScript, Node.js, React, HTML/CSS, and database management. I gain hands-on experience in designing, developing, and implementing modern, responsive web applications.",     
+                beskrivning12: "A theoretical and hands-on program that builds a strong foundation in web development using modern tools and practices. During the first year, I have worked with frontend technologies including HTML, CSS, JavaScript, and TypeScript, as well as frameworks like React and Angular. The education also covers Git version control, agile methodologies, and insights into how web applications are planned, designed, and developed. Alongside my studies, I’ve deepened my skills through independent projects—such as a fully built e-commerce platform using React, Tailwind CSS, and Supabase.",     
                 befattning11: "Founder – Sikr Design",
                 datum11: "March 2024 – Present <hr> Self-owned business – Stockholm",
                 beskrivning11: "I run my own business where I design, manufacture, and sell unique interior products with a strong focus on quality, craftsmanship, and design. Using tools like CAD, CAM, CNC machining, 3D printing, and laser processing, I bring my own product ideas to life – from sketch to finished piece. I manage the entire process myself: design, prototyping, production, packaging, and shipping. I also take care of marketing and customer communication through my webshop and social media. The business is a blend of technology and creativity, allowing me to work with precision, curiosity, and a hands-on approach to problem solving.",
@@ -510,8 +511,8 @@ const getCurrentLanguage = () => localStorage.getItem("language") || "sv";
                 personligtBrevText3: "In addition to running my businesses, I am currently studying to become a full-stack developer at university, which allows me to continuously enhance my skills in web development, database management, and programming.<br><br>In my spare time, I renovate my partner’s apartment part-time, learn to play the guitar, and spend time in nature. I love working out, going for long walks, gardening, and cooking!",
                 contactHeader: "Contact me!",
                 contactText: "Do you have questions or want to know more? Fill out the form below, and I will get back to you as soon as possible. I look forward to hearing from you!",
-                namePlaceholder: "Enter your name here:",
-                subjectPlaceholder: "Subject:",
+                namePlaceholder: "Enter name here:",
+                subjectPlaceholder: "Enter subject here:",
                 emailPlaceholder: "Enter your email address here:",
                 messagePlaceholder: "Enter your message here:",
                 resetButton: "Clear",
@@ -915,14 +916,31 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 </script>
 
 <footer>
-    <div class="footer-container">
-        <p>&copy; 2024 Kraft Creative Design. All rights reserved.</p>
+  <div class="footer-container">
+    <div class="footer-links">
+      <a href="https://webshop-azure-delta.vercel.app/" target="_blank" class="footer-link">
+        <img src="SimonSolutionsLogo.png" alt="Simon Solutions" class="footer-icon">
+        <span class="footer-text"></span>
+      </a>
+      <a href="https://www.linkedin.com/in/simon-kraft-8aa87b211" target="_blank" class="footer-link">
+        <img src="LinkedInLogo.png" alt="LinkedIn Profile" class="footer-icon">
+        <span class="footer-text"></span>
+      </a>
+      <a href="https://sikrdesign.com/" target="_blank" class="footer-link">
+        <img src="SikrLogo.png" alt="SIKR Design" class="footer-icon">
+        <span class="footer-text"></span>
+      </a>
     </div>
-  </footer>
+  </div>
+  <p>&copy; <span id="year"></span> Simon Kraft. All rights reserved.</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
